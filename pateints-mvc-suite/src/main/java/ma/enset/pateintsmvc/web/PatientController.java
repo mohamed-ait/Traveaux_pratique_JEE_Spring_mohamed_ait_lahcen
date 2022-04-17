@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientController {
     private PatientRepository patientRepository;
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String patients(Model model,@RequestParam(name ="page",defaultValue = "0") int page,@RequestParam(name ="size",defaultValue = "5") int size,@RequestParam(name ="keyWord",defaultValue = "") String keyWord){
         Page<Patient> pagePatients = patientRepository.findByNomContains(keyWord,PageRequest.of(page,size));
         model.addAttribute("listPatients",pagePatients.getContent());
@@ -51,18 +51,18 @@ public class PatientController {
         model.addAttribute("totalPages",pagePatients.getTotalPages());
         return "patients";
     }
-    @GetMapping("/formPatients")
+    @GetMapping("/admin/formPatients")
     public String formPatients(Model model){
         model.addAttribute("patient",new Patient());
         return "formPatients";
     }
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(Model model, @Valid  Patient patient, BindingResult bindingResult,@RequestParam(name ="page",defaultValue = "0") int page,@RequestParam(name ="keyWord",defaultValue = " ") String keyWord){
         if(bindingResult.hasErrors())  return "formPatients";
         patientRepository.save(patient);
-        return "redirect:/index?page="+page+"&keyWord="+keyWord;
+        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
-    @GetMapping("/editPatient")
+    @GetMapping("/admin/editPatient")
     public String editPatient(Model model,Long id,int page,String keyWord){
         Patient patient=patientRepository.findById(id).orElse(null);
         model.addAttribute("patient",patient);
@@ -71,10 +71,10 @@ public class PatientController {
     if(patient==null) throw new RuntimeException("patient introuvable!");
         return "editFormPatients";
     }
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id,int page,String keyWord){
         patientRepository.deleteById(id);
-        return "redirect:/index?page="+page+"&keyWord="+keyWord;
+        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
     @GetMapping("/")
     public String home(){

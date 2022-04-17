@@ -47,10 +47,10 @@
                    <td th:text="${p.malade}"></td>
                    <td th:text="${p.score}"></td>
                    <td sec:authorize="hasRole('ADMIN')">
-                       <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${p.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
+                       <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
                    </td>
                    <td sec:authorize="hasRole('ADMIN')">
-                       <a class="btn btn-success" th:href="@{editPatient(id=${p.id},page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-pen"></i></a>
+                       <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id},page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-pen"></i></a>
                    </td>
                </tr>
                </tbody>
@@ -59,14 +59,14 @@
                    <ul class="nav nav-pills ">
                        <li><a
                                th:if="${currentPage!=0}" class="btn btn-success"
-                              th:href="@{index(page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-caret-left"></i></a></li>
+                              th:href="@{/user/index(page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-caret-left"></i></a></li>
                        <li th:each="page,status:${pages}">
                            <a th:class="${page==currentPage? 'btn btn-success ms-1' : 'btn btn-outline-success ms-1'}"
                               th:text="${page}"
-                              th:href="@{index(page=${page},keyWord=${keyWord})}"></a>
+                              th:href="@{/user/index(page=${page},keyWord=${keyWord})}"></a>
                        </li>
                        <li ><a class="btn btn-success ms-1"
-                               th:if="${currentPage!=totalPages+(-1)}" th:href="@{index(page=${currentPage +1},keyWord=${keyWord})}"><i class="bi bi-caret-right"></i></a></li>
+                               th:if="${currentPage!=totalPages+(-1)}" th:href="@{/index/index(page=${currentPage +1},keyWord=${keyWord})}"><i class="bi bi-caret-right"></i></a></li>
                    </ul>
            </div>
 
