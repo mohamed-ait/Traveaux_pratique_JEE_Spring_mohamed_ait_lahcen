@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template1" >
+      layout:decorate="template1"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <title>patient-mvc</title>
@@ -34,8 +35,8 @@
                    <th>Date de Naissance</th>
                    <th>Malade</th>
                    <th>Score</th>
-                   <th>Delete</th>
-                   <th>Edit</th>
+                   <th sec:authorize="hasRole('ADMIN')">Delete</th>
+                   <th sec:authorize="hasRole('ADMIN')">Edit</th>
                </tr>
                </thead>
                <tbody>
@@ -45,10 +46,10 @@
                    <td th:text="${p.date_naissance}"></td>
                    <td th:text="${p.malade}"></td>
                    <td th:text="${p.score}"></td>
-                   <td>
+                   <td sec:authorize="hasRole('ADMIN')">
                        <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${p.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
                    </td>
-                   <td>
+                   <td sec:authorize="hasRole('ADMIN')">
                        <a class="btn btn-success" th:href="@{editPatient(id=${p.id},page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-pen"></i></a>
                    </td>
                </tr>

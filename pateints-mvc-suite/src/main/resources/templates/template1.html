@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -32,7 +32,9 @@
       </li></ul>
     <ul>
       <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">[username]</a>
+        <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+          <span sec:authentication="name">
+        </span></a>
         <ul class="dropdown-menu bg-secondary">
           <li><a class="dropdown-item text-white fw-bold" th:href="@{/logout}">logout</a></li>
         </ul>
