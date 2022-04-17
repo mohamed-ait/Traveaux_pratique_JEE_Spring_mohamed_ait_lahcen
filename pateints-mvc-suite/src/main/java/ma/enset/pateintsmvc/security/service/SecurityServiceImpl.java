@@ -8,12 +8,14 @@ import ma.enset.pateintsmvc.security.repositories.AppRoleRepository;
 import ma.enset.pateintsmvc.security.repositories.AppUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
 @Slf4j
 @AllArgsConstructor
+@Transactional
 public class SecurityServiceImpl implements SecurityService {
     private AppUserRepository appUserRepository;
     private AppRoleRepository appRoleRepository;
@@ -44,16 +46,24 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-
+     AppRole appRole=appRoleRepository.findByRoleName(roleName);
+        if(appRole==null) throw new RuntimeException("role not found");
+     AppUser appUser=appUserRepository.findByUsername(username);
+        if(appUser==null) throw new RuntimeException("user not found");
+     appUser.getRoles().add(appRole);
     }
 
     @Override
     public void removeRoleFromUser(String username, String roleName) {
-
+        AppRole appRole=appRoleRepository.findByRoleName(roleName);
+        if(appRole==null) throw new RuntimeException("role not found");
+        AppUser appUser=appUserRepository.findByUsername(username);
+        if(appUser==null) throw new RuntimeException("user not found");
+        appUser.getRoles().remove(appRole);
     }
 
     @Override
     public AppUser loadUserByUserName(String username) {
-        return null;
+        return appUserRepository.findByUsername(username);
     }
 }
