@@ -15,7 +15,7 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active text-white fw-bold" th:href="@{/user/index}">Home</a>
+        <a class="nav-link active text-white fw-bold" th:href="@{/index}">Home</a>
       </li>
 
       <li class="nav-item">
@@ -28,7 +28,7 @@
         <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">Patients</a>
         <ul class="dropdown-menu bg-secondary">
           <li><a sec:authorize="hasRole('ADMIN')" class="dropdown-item text-white fw-bold" th:href="@{/admin/formPatients}">nouveau</a></li>
-          <li><a class="dropdown-item text-white fw-bold" th:href="@{/user/index}">chercher</a></li>
+          <li><a class="dropdown-item text-white fw-bold" th:href="@{/index}">chercher</a></li>
         </ul>
       </li></ul>
     <ul>
