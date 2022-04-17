@@ -1,4 +1,4 @@
-package ma.enset.pateintsmvc.security;
+package ma.enset.pateintsmvc.security.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
