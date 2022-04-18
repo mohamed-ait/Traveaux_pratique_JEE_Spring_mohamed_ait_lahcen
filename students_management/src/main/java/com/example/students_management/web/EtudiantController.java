@@ -21,7 +21,7 @@ import java.util.List;
 public class EtudiantController {
     private EtudiantRepository etudiantRepository;
     @GetMapping("/index")
-    public String patients(Model model, @RequestParam(name ="page",defaultValue = "0") int page, @RequestParam(name ="size",defaultValue = "5") int size, @RequestParam(name ="keyWord",defaultValue = "") String keyWord){
+    public String etudiants(Model model, @RequestParam(name ="page",defaultValue = "0") int page, @RequestParam(name ="size",defaultValue = "5") int size, @RequestParam(name ="keyWord",defaultValue = "") String keyWord){
         Page<Etudiant> pageEtudiants = etudiantRepository.findByNomContains(keyWord, PageRequest.of(page,size));
         model.addAttribute("listEtudiants",pageEtudiants.getContent());
         int nbrPage;

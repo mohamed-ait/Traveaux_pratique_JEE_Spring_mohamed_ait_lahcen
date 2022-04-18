@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template1"
+      layout:decorate="template"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
@@ -49,10 +49,10 @@
                         <td th:text="${e.genre}"></td>
                         <td th:text="${e.regle}"></td>
                         <td >
-                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${e.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
+                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
-                        <td sec:authorize="hasRole('ADMIN')">
-                            <a class="btn btn-success" th:href="@{/editEtudiant(id=${e.id},page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-pen"></i></a>
+                        <td >
+                            <a class="btn btn-success"><i class="bi bi-pen"></i></a>
                         </td>
                     </tr>
                     </tbody>
