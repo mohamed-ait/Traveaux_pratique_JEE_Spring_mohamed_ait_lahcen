@@ -23,7 +23,7 @@ public class EtudiantController {
     @GetMapping("/index")
     public String patients(Model model, @RequestParam(name ="page",defaultValue = "0") int page, @RequestParam(name ="size",defaultValue = "5") int size, @RequestParam(name ="keyWord",defaultValue = "") String keyWord){
         Page<Etudiant> pageEtudiants = etudiantRepository.findByNomContains(keyWord, PageRequest.of(page,size));
-        model.addAttribute("listPatients",pageEtudiants.getContent());
+        model.addAttribute("listEtudiants",pageEtudiants.getContent());
         int nbrPage;
         if(pageEtudiants.getTotalPages()>10)nbrPage=10;
         else nbrPage=pageEtudiants.getTotalPages();
@@ -48,7 +48,7 @@ public class EtudiantController {
         model.addAttribute("currentPage",page);
         model.addAttribute("keyWord",keyWord);
         model.addAttribute("totalPages",pageEtudiants.getTotalPages());
-        return "patients";
+        return "etudiants";
     }
 
 }

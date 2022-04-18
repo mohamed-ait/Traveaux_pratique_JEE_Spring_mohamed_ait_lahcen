@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <title>Students management</title>
+    <style>
+        .inp{
+            height: 40px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
+<div layout:fragment="content1">
+    <div class="container p-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3><i class="bi bi-person-lines-fill mx-2"></i>La liste des étudiants </h3>
+            </div>
+            <div class="card-body">
+                <form method="get" th:action="@{/index}" class="my-3">
+                    <input type="text" name="keyWord" th:value="${keyWord}" placeholder="key word" class="text-center inp ">
+                    <button type="submit" class="btn btn-warning"><i class="bi bi-search mx-2"></i></button>
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="bg-secondary text-white">
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Email</th>
+                        <th>Date de Naissance</th>
+                        <th>Genre</th>
+                        <th>Regle</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e:${listEtudiants}">
+                        <td th:text="${e.id}"></td>
+                        <td th:text="${e.nom}"></td>
+                        <td th:text="${e.getPrenom()}"></td>
+                        <td th:text="${e.email}"></td>
+                        <td th:text="${e.getDateNaissance()}"></td>
+                        <td th:text="${e.genre}"></td>
+                        <td th:text="${e.regle}"></td>
+                        <td >
+                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${e.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
+                        </td>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a class="btn btn-success" th:href="@{/editEtudiant(id=${e.id},page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-pen"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class=" d-flex justify-content-center align-items-center">
+                    <ul class="nav nav-pills ">
+                        <li><a
+                                th:if="${currentPage!=0}" class="btn btn-success"
+                                th:href="@{/index(page=${currentPage -1},keyWord=${keyWord})}"><i class="bi bi-caret-left"></i></a></li>
+                        <li th:each="page,status:${pages}">
+                            <a th:class="${page==currentPage? 'btn btn-success ms-1' : 'btn btn-outline-success ms-1'}"
+                               th:text="${page}"
+                               th:href="@{/index(page=${page},keyWord=${keyWord})}"></a>
+                        </li>
+                        <li ><a class="btn btn-success ms-1"
+                                th:if="${currentPage!=totalPages+(-1)}" th:href="@{/index(page=${currentPage +1},keyWord=${keyWord})}"><i class="bi bi-caret-right"></i></a></li>
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+
+    </div></div>
 </body>
 </html>
