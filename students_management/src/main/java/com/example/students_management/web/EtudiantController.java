@@ -50,5 +50,22 @@ public class EtudiantController {
         model.addAttribute("totalPages",pageEtudiants.getTotalPages());
         return "etudiants";
     }
+    //methode to save student
+    @PostMapping("/save")
+    public String save(Model model, @Valid  Etudiant etudiant, BindingResult bindingResult,@RequestParam(name ="page",defaultValue = "0") int page,@RequestParam(name ="keyWord",defaultValue = " ") String keyWord){
+        if(bindingResult.hasErrors())  return "etudiants";
+        etudiantRepository.save(etudiant);
+        return "redirect:/index?page="+page+"&keyWord="+keyWord;
+    }
+    //edit function :
+    @GetMapping("/editEtudiant")
+    public String editEtudiant(Model model,Long id,int page,String keyWord){
+        Etudiant etudiant=etudiantRepository.findById(id).orElse(null);
+        model.addAttribute("etudiant",etudiant);
+        model.addAttribute("page",page);
+        model.addAttribute("keyWord",keyWord);
+        if(etudiant==null) throw new RuntimeException("etudiant introuvable!");
+        return "editFormPage";
+    }
 
 }
