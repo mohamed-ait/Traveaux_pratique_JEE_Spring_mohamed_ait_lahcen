@@ -57,6 +57,12 @@ public class EtudiantController {
         etudiantRepository.save(etudiant);
         return "redirect:/index?page="+page+"&keyWord="+keyWord;
     }
+    //methode to get addFormEtudiant view :
+    @GetMapping("/addEtudiant")
+    public String addFormEtudiant(Model model){
+        model.addAttribute("etudiant",new Etudiant());
+        return "addFormEtudiant";
+    }
     //edit function :
     @GetMapping("/editEtudiant")
     public String editEtudiant(Model model,Long id,int page,String keyWord){
