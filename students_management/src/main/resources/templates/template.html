@@ -20,16 +20,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled text-white fw-bold" href="#">Disabled</a>
+                <a class="nav-link text-white fw-bold fs-5" th:href="@{/}">Accueil</a>
             </li>
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">Patients</a>
+                <a class="nav-link dropdown-toggle text-white fw-bold fs-5" href="#" role="button" data-bs-toggle="dropdown">Etudiants</a>
                 <ul class="dropdown-menu bg-secondary">
-                    <li><a class="dropdown-item text-white fw-bold" >nouveau</a></li>
-                    <li><a class="dropdown-item text-white fw-bold" th:href="@{/index}">chercher</a></li>
+                    <li><a th:href="@{/addEtudiant}" class="dropdown-item text-white fw-bold" >nouveau<i class="fa fa-user-plus></i"></i></a></li>
+                    <li><a class="dropdown-item text-white fw-bold" th:href="@{/index}">chercher<i class="fa fa-magnifying-glass"></i></a></li>
                 </ul>
             </li></ul>
         <ul>
@@ -51,7 +48,7 @@
 
     <!-- Footer -->
     <footer
-            class="text-center text-lg-start text-white bg-secondary"
+            class="text-center text-lg-start text-white bg-secondary mt-auto"
     >
         <!-- Grid container -->
         <div class="container p-4 pb-0">

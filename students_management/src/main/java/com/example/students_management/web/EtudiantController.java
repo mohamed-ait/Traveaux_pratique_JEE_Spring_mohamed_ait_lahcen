@@ -11,10 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -78,5 +76,17 @@ public class EtudiantController {
     public String delete(Long id,int page,String keyWord){
         etudiantRepository.deleteById(id);
         return "redirect:/index?page="+page+"&keyWord="+keyWord;}
+    @GetMapping("/403")
+    public String error403(){
+        return "403";
+    }
+    @GetMapping("/error")
+    private String error404(){
+        return "404";
+    }
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
     }
 

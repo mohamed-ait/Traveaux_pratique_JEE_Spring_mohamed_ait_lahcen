@@ -45,11 +45,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeHttpRequests().antMatchers("/").permitAll();
-        http.authorizeHttpRequests().antMatchers("/index/**","/edit/**","/delete/**","/formPatients/**","/save/**","/editPatient/**").hasAnyAuthority("ADMIN");
-        http.authorizeHttpRequests().antMatchers("/index/**").hasAnyAuthority("USER");
+        http.authorizeHttpRequests().antMatchers("/index/**","/addEtudiant/**","/delete/**","/save/**","/editEtudiant/**").hasAuthority("ADMIN");
+        http.authorizeHttpRequests().antMatchers("/index/**").hasAuthority("USER");
         http.authorizeHttpRequests().antMatchers("/webjars/**").permitAll();
         http.exceptionHandling().accessDeniedPage("/403");
         http.authorizeHttpRequests().anyRequest().authenticated();
+        http.formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .permitAll();
     }
     @Bean
     PasswordEncoder passwordEncoder(){
