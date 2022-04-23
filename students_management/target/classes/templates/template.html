@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+<!-- Grey with black text -->
+<nav class="navbar navbar-expand-sm bg-secondary navbar-light">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active text-white fw-bold" th:href="@{/index}"><i class="fa fa-mortar-board fa-2x fw-bold"></i></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled text-white fw-bold" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">Patients</a>
+                <ul class="dropdown-menu bg-secondary">
+                    <li><a class="dropdown-item text-white fw-bold" >nouveau</a></li>
+                    <li><a class="dropdown-item text-white fw-bold" th:href="@{/index}">chercher</a></li>
+                </ul>
+            </li></ul>
+        <ul>
+            <li  class="nav-item dropdown ">
+                <a  class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+          <span sec:authentication="name">
+        </span></a>
+                <ul class="dropdown-menu bg-secondary">
+                    <li><a class="dropdown-item text-white fw-bold" th:href="@{/logout}">logout</a></li>
+                </ul>
+            </li>
+           <!-- <li  class="nav-item">
+                <a class="nav-link text-white fw-bold" th:href="@{/login}">login</a>
+            </li>-->
+        </ul>
+    </div>
+</nav>
+<section layout:fragment="content1"></section>
+
+    <!-- Footer -->
+    <footer
+            class="text-center text-lg-start text-white bg-secondary"
+    >
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">
+                            Company name
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer
+                            content.
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                        <p>
+                            <a class="text-white">MDBootstrap</a>
+                        </p>
+                        <p>
+                            <a class="text-white">BrandFlow</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Bootstrap Angular</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p><i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+                        <p><i class="fa fa-envelope mr-3"></i> info@gmail.com</p>
+                        <p><i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+                        <!-- Facebook -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #3b5998"
+                                href="#!"
+                                role="button"
+                        ><i class="fa fa-facebook-f"></i
+                        ></a>
+
+                        <!-- Twitter -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #55acee"
+                                href="#!"
+                                role="button"
+                        ><i class="fa fa-twitter"></i
+                        ></a>
+
+                        <!-- Google -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #dd4b39"
+                                href="#!"
+                                role="button"
+                        ><i class="fa fa-google"></i
+                        ></a>
+
+                        <!-- Instagram -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #ac2bac"
+                                href="#!"
+                                role="button"
+                        ><i class="fa fa-instagram"></i
+                        ></a>
+
+                        <!-- Github -->
+                        <a
+                                class="btn btn-primary btn-floating m-1"
+                                style="background-color: #333333"
+                                href="#!"
+                                role="button"
+                        ><i class="fa fa-github"></i
+                        ></a>
+                    </div>
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+            © 2020 Copyright:
+            <a class="text-white" href="https:/enset.ma/"
+            >enset.ma</a
+            >
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+<!-- End of .container -->
+</body>
+</html>

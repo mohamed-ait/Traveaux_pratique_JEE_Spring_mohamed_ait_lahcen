@@ -53,7 +53,7 @@ public class EtudiantController {
     //methode to save student
     @PostMapping("/save")
     public String save(Model model, @Valid  Etudiant etudiant, BindingResult bindingResult,@RequestParam(name ="page",defaultValue = "0") int page,@RequestParam(name ="keyWord",defaultValue = " ") String keyWord){
-        if(bindingResult.hasErrors())  return "etudiants";
+        if(bindingResult.hasErrors())  return "addFormEtudiant";
         etudiantRepository.save(etudiant);
         return "redirect:/index?page="+page+"&keyWord="+keyWord;
     }
@@ -73,5 +73,10 @@ public class EtudiantController {
         if(etudiant==null) throw new RuntimeException("etudiant introuvable!");
         return "editFormPage";
     }
+    //methode to delete a student :
+    @GetMapping("/delete")
+    public String delete(Long id,int page,String keyWord){
+        etudiantRepository.deleteById(id);
+        return "redirect:/index?page="+page+"&keyWord="+keyWord;}
+    }
 
-}

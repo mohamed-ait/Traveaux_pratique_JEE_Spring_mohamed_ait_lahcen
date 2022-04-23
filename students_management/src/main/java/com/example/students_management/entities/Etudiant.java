@@ -3,6 +3,7 @@ package com.example.students_management.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Etudiant {
     private String nom;
     private String prenom;
     private String email;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateNaissance;
     private Genre genre;
     private boolean regle;
