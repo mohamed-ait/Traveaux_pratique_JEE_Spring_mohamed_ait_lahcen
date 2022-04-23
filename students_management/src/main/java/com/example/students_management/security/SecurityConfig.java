@@ -3,6 +3,7 @@ package com.example.students_management.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +20,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
     private DataSource dataSource;
     //dans cette methode on specifie comment spring chercher les roles des utilisateurs:
     @Override
@@ -29,26 +32,21 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         System.out.println(encodedPasword);
      auth.inMemoryAuthentication().withUser("user1").password(encodedPasword).roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("admin12345")).roles("Admin");*/
-      /* auth.jdbcAuthentication().dataSource(dataSource)
+      /*auth.jdbcAuthentication().dataSource(dataSource)
                 //cette requète permet de charger l'tuilisateur:
                 .usersByUsernameQuery("select username as principal,password as credentials,active from users where username=?")
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder);*/
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        });
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeHttpRequests().antMatchers("/").permitAll();
-        http.authorizeHttpRequests().antMatchers("/delete/**","/edit/**","/delete/**","/formPatients/**","/save/**","/editPatient/**").hasRole("ADMIN");
-        http.authorizeHttpRequests().antMatchers("/index/**").hasRole("USER");
+        http.authorizeHttpRequests().antMatchers("/index/**","/edit/**","/delete/**","/formPatients/**","/save/**","/editPatient/**").hasAnyAuthority("ADMIN");
+        http.authorizeHttpRequests().antMatchers("/index/**").hasAnyAuthority("USER");
         http.authorizeHttpRequests().antMatchers("/webjars/**").permitAll();
         http.exceptionHandling().accessDeniedPage("/403");
         http.authorizeHttpRequests().anyRequest().authenticated();

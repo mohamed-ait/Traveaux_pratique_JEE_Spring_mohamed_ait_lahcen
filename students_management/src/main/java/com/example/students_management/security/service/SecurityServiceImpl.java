@@ -4,8 +4,10 @@ import com.example.students_management.security.entities.AppRole;
 import com.example.students_management.security.entities.AppUser;
 import com.example.students_management.security.repositories.AppRoleRepository;
 import com.example.students_management.security.repositories.AppUserRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,22 +20,19 @@ import java.util.UUID;
 @Transactional
 @NoArgsConstructor
 public class SecurityServiceImpl implements SecurityService {
+    @Autowired
     private AppUserRepository appUserRepository;
+    @Autowired
     private AppRoleRepository appRoleRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    public SecurityServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
-        this.appUserRepository = appUserRepository;
-        this.appRoleRepository = appRoleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public AppUser saveNewUser(String username, String password, String rePassword) {
         if(!password.equals(rePassword)) throw new RuntimeException("password no match");
         String hashedPassword=passwordEncoder.encode(password);
         AppUser appUser=new AppUser();
-        appUser.setUserId(UUID.randomUUID().toString());
+        //appUser.setUserId(UUID.randomUUID().toString());
         appUser.setUserName(username);
         appUser.setPassword(hashedPassword);
         appUser.setActive(true);
@@ -56,7 +55,7 @@ public class SecurityServiceImpl implements SecurityService {
     public void addRoleToUser(String username, String roleName) {
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         if(appRole==null) throw new RuntimeException("role not found");
-        AppUser appUser=appUserRepository.findByUsername(username);
+        AppUser appUser=appUserRepository.findByUserName(username);
         if(appUser==null) throw new RuntimeException("user not found");
         appUser.getRoles().add(appRole);
     }
@@ -65,13 +64,13 @@ public class SecurityServiceImpl implements SecurityService {
     public void removeRoleFromUser(String username, String roleName) {
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         if(appRole==null) throw new RuntimeException("role not found");
-        AppUser appUser=appUserRepository.findByUsername(username);
+        AppUser appUser=appUserRepository.findByUserName(username);
         if(appUser==null) throw new RuntimeException("user not found");
         appUser.getRoles().remove(appRole);
     }
 
     @Override
     public AppUser loadUserByUserName(String username) {
-        return appUserRepository.findByUsername(username);
+        return appUserRepository.findByUserName(username);
     }
 }

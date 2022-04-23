@@ -27,7 +27,7 @@ public class StudentsManagementApplication {
 
 		};
   }
-	@Bean
+	//@Bean
 	CommandLineRunner saveUsers(SecurityService securityService){
 		return args->{
 			//create users

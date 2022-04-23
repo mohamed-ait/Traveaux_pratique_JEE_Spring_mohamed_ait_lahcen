@@ -10,12 +10,12 @@ import java.util.List;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class AppUser {
-    @Id
-    private String userId;
-    @Column(unique = true, length =20 )
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true, length = 20)
     private String userName;
     private String password;
     private boolean active;
     @ManyToMany( fetch = FetchType.EAGER)
-    private List<AppRole> roles=new ArrayList<>();
+   private List<AppRole> roles=new ArrayList<>();
 }
