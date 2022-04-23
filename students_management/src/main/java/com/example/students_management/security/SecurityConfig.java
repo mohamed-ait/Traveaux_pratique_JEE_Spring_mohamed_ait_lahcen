@@ -35,7 +35,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder);*/
-
+        auth.userDetailsService(new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return null;
+            }
+        });
     }
 
     @Override
