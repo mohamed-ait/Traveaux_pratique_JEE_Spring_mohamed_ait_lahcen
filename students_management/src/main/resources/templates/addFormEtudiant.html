@@ -36,20 +36,21 @@
                  <span class="text-danger" th:errors="${etudiant.email}"></span>
              </div>
              <div class="col-md-6">
-                 <input type="date" class="form-control" id="dateNaissance" placeholder="Enter la date de naissance" name="date_naissance" th:value="${etudiant.dateNaissance}">
+                 <input type="date" class="form-control" id="dateNaissance" placeholder="Enter la date de naissance" name="dateNaissance" th:value="${etudiant.getDateNaissance()}">
                  <span class="text-danger"  th:errors="${etudiant.dateNaissance}"></span>
              </div>
                  </div>
                  <div class="row my-4">
                      <div class=" col-md-6 ">
-                 <select class="form-select">
-                     <option th:value="${etudiant.genre}">MASCULIN</option>
-                     <option th:value="${etudiant.genre}">FEMININ</option>
+                 <select class="form-select" id="genre" name="genre">
+                     <option selected disabled> Genre</option>
+                     <option value="MASCULIN" th:selected="${etudiant.getGenre()=='MASCULIN'}"> Masculin</option>
+                     <option value="FEMININ" th:selected="${etudiant.getGenre()=='FEMININ'}"> Féminin</option>
                  </select>
              </div>
              <div class="col-md-6">
-                 <label for="regle" class="form-label">Règle:</label>
-                 <input class="form-check-input" type="checkbox" id="regle"  name="regle" th:checked="${etudiant.regle}">
+                 <label for="regle" class="form-label mt-2 me-2">Règle:</label>
+                 <input class="form-check-input " style="margin-top:12px" type="checkbox" id="regle"  name="regle" th:checked="${etudiant.regle}">
                  <span class="text-danger" th:errors="${etudiant.regle}"></span>
              </div>
                  </div>

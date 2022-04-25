@@ -5,10 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 @Entity
 @Data
@@ -17,11 +18,20 @@ import java.util.Date;
 public class Etudiant {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "saisi le nom !")
+    @Size(min = 3 ,max = 35 , message = "la longueur du nom doit etre entre 3 et 35")
     private String nom;
+    @NotBlank(message = "saisi le prenom !")
+    @Size(min = 3 ,max = 35 , message = "la longueur du prenom doit etre entre 3 et 35")
     private String prenom;
+    @Email(message = "email invalid!")
+    @NotNull(message = "saisi une adresse mail!")
     private String email;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @NotNull(message = "La date est obligatoire!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
+    @NotNull(message = "choisi le genre !")
     private Genre genre;
     private boolean regle;
 

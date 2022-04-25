@@ -71,6 +71,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public AppUser loadUserByUserName(String username) {
+       // if(appUserRepository.findByUserName(username)==null) throw new RuntimeException("user no found!");
         return appUserRepository.findByUserName(username);
     }
 }

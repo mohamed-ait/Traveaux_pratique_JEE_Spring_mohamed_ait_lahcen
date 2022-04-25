@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
@@ -61,6 +62,7 @@ public class EtudiantController {
         model.addAttribute("etudiant",new Etudiant());
         return "addFormEtudiant";
     }
+
     //edit function :
     @GetMapping("/editEtudiant")
     public String editEtudiant(Model model,Long id,int page,String keyWord){
@@ -84,9 +86,11 @@ public class EtudiantController {
     private String error404(){
         return "404";
     }
-    @GetMapping("/login")
-    public String viewLoginPage() {
+    @GetMapping
+    @RequestMapping("/login")
+    public String login() {
         return "login";
     }
+
     }
 

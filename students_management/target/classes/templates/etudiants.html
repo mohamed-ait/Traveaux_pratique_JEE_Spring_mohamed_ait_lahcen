@@ -23,9 +23,9 @@
             <div class="card-body">
                 <form method="get" th:action="@{/index}" class="my-3">
                     <input type="text" name="keyWord" th:value="${keyWord}" placeholder="key word" class="text-center inp ">
-                    <button type="submit" class="btn btn-warning"><i class="bi bi-search mx-2"></i></button>
+                    <button type="submit" class="btn btn-warning"><i class="bi bi-search mx-2" ></i></button>
                 </form>
-                <table class="table table-striped">
+                <table class="table table-striped text-center">
                     <thead>
                     <tr class="bg-secondary text-white">
                         <th>ID</th>
@@ -47,7 +47,11 @@
                         <td th:text="${e.email}"></td>
                         <td th:text="${e.getDateNaissance()}"></td>
                         <td th:text="${e.genre}"></td>
-                        <td th:text="${e.regle}"></td>
+                        <td><span th:switch="${e.regle}">
+                                  <i th:case="true" class="bi bi-check text-success" style="font-size:24px;"></i>
+                                  <i th:case="false" class="bi bi-x text-danger " style="font-size:24px;"></i>
+                               </span>
+                        </td>
                         <td >
                             <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{/delete(id=${e.id},page=${currentPage},keyWord=${keyWord})}"><i class="bi bi-trash"></i></a>
                         </td>

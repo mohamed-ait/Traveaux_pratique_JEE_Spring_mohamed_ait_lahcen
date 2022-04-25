@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -26,7 +27,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     //dans cette methode on specifie comment spring chercher les roles des utilisateurs:
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder passwordEncoder=passwordEncoder();
+       PasswordEncoder passwordEncoder=passwordEncoder();
         /*
         String encodedPasword=passwordEncoder.encode("12345");
         System.out.println(encodedPasword);
@@ -38,22 +39,20 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder);*/
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin();
-        http.authorizeHttpRequests().antMatchers("/").permitAll();
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/",false);
+        http.csrf().disable();
+        http.authorizeHttpRequests().antMatchers("/","/login/**").permitAll();
         http.authorizeHttpRequests().antMatchers("/index/**","/addEtudiant/**","/delete/**","/save/**","/editEtudiant/**").hasAuthority("ADMIN");
         http.authorizeHttpRequests().antMatchers("/index/**").hasAuthority("USER");
         http.authorizeHttpRequests().antMatchers("/webjars/**").permitAll();
         http.exceptionHandling().accessDeniedPage("/403");
         http.authorizeHttpRequests().anyRequest().authenticated();
-        http.formLogin()
-                .loginPage("/login")
-                .usernameParameter("username")
-                .permitAll();
+
     }
     @Bean
     PasswordEncoder passwordEncoder(){
