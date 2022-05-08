@@ -29,18 +29,13 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         System.out.println(encodedPasword);
      auth.inMemoryAuthentication().withUser("user1").password(encodedPasword).roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("admin12345")).roles("Admin");*/
-       /* auth.jdbcAuthentication().dataSource(dataSource)
+      /* auth.jdbcAuthentication().dataSource(dataSource)
                 //cette requète permet de charger l'tuilisateur:
                 .usersByUsernameQuery("select username as principal,password as credentials,active from users where username=?")
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder);*/
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        })
+
     }
 
     @Override

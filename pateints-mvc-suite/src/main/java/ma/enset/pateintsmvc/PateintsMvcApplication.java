@@ -2,6 +2,7 @@ package ma.enset.pateintsmvc;
 
 import ma.enset.pateintsmvc.entities.Patient;
 import ma.enset.pateintsmvc.repositories.PatientRepository;
+import ma.enset.pateintsmvc.security.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,5 +27,20 @@ public class PateintsMvcApplication {
                System.out.println(p.getNom());
            });*/
         };
+
+}
+@Bean
+    CommandLineRunner saveUsers(SecurityService securityService){
+       return args->{
+           /*securityService.saveNewUser("med","med123","med123");
+           securityService.saveNewUser("moha","med123","med123");
+           securityService.saveNewUser("medo","med123","med123");
+           securityService.saveNewRole("ADMIN","admin role description");
+           securityService.saveNewRole("USER","user role description");
+           securityService.addRoleToUser("med","ADMIN");
+           securityService.addRoleToUser("med","USER");
+           securityService.addRoleToUser("medo","USER");
+           securityService.addRoleToUser("moha","USER");*/
+       };
 }
 }
