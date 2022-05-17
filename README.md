@@ -6,3 +6,13 @@
 |           TP3            |           mapping objet relationnel avec JPA, Hibernate et Spring Data : Gestion des consultations           | [:link:](https://github.com/mohamed-ait/Traveaux_pratique_JEE_Spring_mohamed_ait_lahcen/tree/main/hospital) |
 |           TP4            |            Spring MVC, Thylemeaf : Gestion des patients          | [:link:](https://github.com/mohamed-ait/Traveaux_pratique_JEE_Spring_mohamed_ait_lahcen/tree/main/pateints-mvc-suite) |
 |           TP5            |            Spring MVC, Thylemeaf : Gestion des étudiants          | [:link:](https://github.com/mohamed-ait/student-management-spring-mvc) |
+|          mini projet            |            mini framework de l'injection des dépendances         | [:link:](https://github.com/mohamed-ait/dependancy-injection-framework) |
+
+
+
+
+
+
+
+
+
